@@ -46,10 +46,9 @@
     }
 
     .non {
-  background-color: #ddd;
-  position: absolute;
-  transition: transform 0.4s ease-out;
-}
+      background-color: #ddd;
+      position: absolute;
+    }
 
     /* 💕 Emojis animés en arrière-plan */
     .emoji {
@@ -87,14 +86,14 @@
 
     /* Bouton non fuyant */
     const non = document.getElementById("non");
-    non.addEventListener("mouseenter", () => {
-  const x = (Math.random() - 0.5) * 300;
-  const y = (Math.random() - 0.5) * 200;
-  non.style.transform = `translate(${x}px, ${y}px)`;
-});
+    non.addEventListener("mouseover", () => {
+      const x = Math.random() * 240 - 120;
+      const y = Math.random() * 180 - 90;
+      non.style.transform = `translate(${x}px, ${y}px)`;
+    });
 
     /* Emojis roses & cœurs animés */
-    const emojis = ["🌹", "💖", "❤️", "💞", "🌸"];
+    const emojis = ["💗", "💖", "💕", "💞", "🌸"];
 
     function createEmoji() {
       const e = document.createElement("div");
