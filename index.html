@@ -2,13 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ma Valentine 💘</title>
+  <title>Ma Valentine 💖</title>
+
   <style>
     body {
+      margin: 0;
+      height: 100vh;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       font-family: Arial, sans-serif;
-      height: 100vh;
-      margin: 0;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -17,18 +18,23 @@
 
     .card {
       background: white;
-      padding: 30px;
-      border-radius: 15px;
+      padding: 35px;
+      border-radius: 18px;
       text-align: center;
       position: relative;
-      width: 320px;
+      width: 340px;
       z-index: 2;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-bottom: 20px;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 22px;
       font-size: 16px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
       margin: 10px;
@@ -40,22 +46,23 @@
     }
 
     .non {
-      background-color: lightgray;
+      background-color: #ddd;
       position: absolute;
     }
 
-    /* 💕 Cœurs */
-    .heart {
+    /* 💕 Emojis animés en arrière-plan */
+    .emoji {
       position: fixed;
-      top: -20px;
-      font-size: 20px;
+      top: -30px;
+      font-size: 22px;
       animation: fall linear forwards;
       z-index: 1;
+      opacity: 0.8;
     }
 
     @keyframes fall {
       to {
-        transform: translateY(110vh);
+        transform: translateY(110vh) rotate(360deg);
         opacity: 0;
       }
     }
@@ -70,42 +77,52 @@
   </div>
 
   <script>
-    // Prénom depuis le lien
+    /* Prénom depuis le lien */
     const params = new URLSearchParams(window.location.search);
     const prenom = params.get("prenom") || "toi";
 
     document.getElementById("question").innerText =
-      `Veux-tu être ma Valentine, ${prenom} ? 💘`;
+      `Veux-tu être ma Valentine, ${Claire} ? 💘`;
 
-    // Bouton non qui bouge
+    /* Bouton non fuyant */
     const non = document.getElementById("non");
     non.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
+      const x = Math.random() * 240 - 120;
+      const y = Math.random() * 180 - 90;
       non.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    // Cœurs animés
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerText = "💖";
+    /* Emojis roses & cœurs animés */
+    const emojis = ["🌹", "💖", "💕", "💞", "🌸"];
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-
-      document.body.appendChild(heart);
+    function createEmoji() {
+      const e = document.createElement("div");
+      e.classList.add("emoji");
+      e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(e);
 
       setTimeout(() => {
-        heart.remove();
-      }, 6000);
+        e.remove();
+      }, 7000);
     }
 
-    setInterval(createHeart, 400);
+    setInterval(createEmoji, 350);
 
+    /* Message final */
     function oui() {
-      document.body.innerHTML =
-        `<h1 style="text-align:center;">Yesss 💕🥰<br>${prenom} 💖</h1>`;
+      document.body.innerHTML = `
+        <div style="
+          text-align:center;
+          padding:40px;
+          font-size:22px;
+          color:#ff4d6d;">
+          💕<br><br>
+          Tu rendra cette journée quasi parfaite,<br>
+          il me faudra peut être un câlin pour qu’elle le devienne 💗
+        </div>
+      `;
     }
   </script>
 
